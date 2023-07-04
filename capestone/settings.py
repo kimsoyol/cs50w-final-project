@@ -51,6 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'capestone.urls'
+LOGIN_URL = '/login'
 
 TEMPLATES = [
     {
@@ -80,6 +81,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+AUTH_USER_MODEL = 'eventbook.User'
 
 
 # Password validation
