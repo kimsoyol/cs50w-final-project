@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     wallet = models.DecimalField(max_digits=8, decimal_places=2, null=True)
-    events = models.ManyToManyField('Event', related_name="guests", null=True)
     pass
 
 class Event(models.Model):
@@ -15,6 +14,20 @@ class Event(models.Model):
     capacity = models.PositiveIntegerField()
     privacy = models.CharField(max_length=20)
     organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organized_events')
+    guests = models.ManyToManyField(User, related_name="events_guest")
+
+    def serialize(self):
+        return {
+        'title': self.title, 
+        'start_time': self.start_time.strftime("%b %d %Y, %I:%M %p"),
+        'description': self.description,
+        'location': self.location,
+        'image_url': self.image_url,
+        'capacity': self.capacity,
+        'privacy': self.privacy,
+        'organizer': self.organizer.username,
+        'guests': [guest.username for guest in self.guests.all()]
+    }
 
 
 class Ticket(models.Model):
