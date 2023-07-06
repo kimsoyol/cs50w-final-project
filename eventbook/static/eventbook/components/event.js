@@ -1,23 +1,30 @@
 function EventContainer() {
+  const [events, setEvents] = React.useState([]);
 
-  const [events, setEvents] = React.useState([])
-
-  React.useEffect(() => { 
+  React.useEffect(() => {
     fetch(`/events`)
-    .then((response) => response.json())
-    .then(events => {
-      setEvents(events)
-    })
-   },[])
+      .then((response) => response.json())
+      .then((events) => {
+        setEvents(events);
+      });
+  }, []);
 
-  return (
-      events.map(event => (
-        <div id={event.id}>
-          <h3>{event.title}</h3>
-          <span>{new Date(event.start_time).toLocaleString()}</span>
-        </div>
-      ))
-  );
+  return events.map((event) => (
+    <div id={event.id} className="shrink-0 w-80 rounded-xl shadow-lg">
+      <img
+        src={event.image_url}
+        alt="event-image"
+        className="rounded-lg"
+      />
+      <div className="mt-4">
+        <span>{event.start_time}</span>
+        <h3>{event.title}</h3>
+        <p>{event.location}</p>
+        <span>{event.interested_guests.length} Interested</span>
+        <span>{event.going_guests.length} Going</span>
+      </div>
+    </div>
+  ));
 }
 
 ReactDOM.render(<EventContainer />, document.querySelector("#events-section"));

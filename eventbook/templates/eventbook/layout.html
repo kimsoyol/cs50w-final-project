@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script
       src="https://unpkg.com/react@18/umd/react.production.min.js"
       crossorigin
@@ -21,6 +22,41 @@
     {% block script %} {% endblock %}
   </head>
   <body>
+    <div>
+      {% if user.is_authenticated %}
+          Signed in as <strong>{{ user.username }}</strong>.
+      {% else %}
+          Not signed in.
+      {% endif %}
+  </div>
+  <ul class="nav">
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}">Active Events</a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+          <a class="nav-link" href="#">Categories</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#">
+              Watchlist
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#">Create Event</a>
+      </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+          </li>
+      {% else %}
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Log In</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+          {% endif %}
+        </ul>
     <div class="container">{% block body %} {% endblock %}</div>
   </body>
 </html>

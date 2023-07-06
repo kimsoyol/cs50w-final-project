@@ -14,19 +14,22 @@ class Event(models.Model):
     capacity = models.PositiveIntegerField()
     privacy = models.CharField(max_length=20)
     organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organized_events')
-    guests = models.ManyToManyField(User, related_name="events_guest")
+    interested_guests = models.ManyToManyField(User, related_name="interested_guest", blank=True)
+    going_guests = models.ManyToManyField(User, related_name="going_guests", blank=True)
 
     def serialize(self):
         return {
+        'id': self.id,
         'title': self.title, 
-        'start_time': self.start_time.strftime("%b %d %Y, %I:%M %p"),
+        'start_time': self.start_time.strftime("%A, %b %d %Y, %I:%M %p"),
         'description': self.description,
         'location': self.location,
         'image_url': self.image_url,
         'capacity': self.capacity,
         'privacy': self.privacy,
         'organizer': self.organizer.username,
-        'guests': [guest.username for guest in self.guests.all()]
+        'interested_guests': [guest.username for guest in self.interested_guests.all()],
+        'going_guests': [guest.username for guest in self.going_guests.all()]
     }
 
 
