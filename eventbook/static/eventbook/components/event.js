@@ -1,4 +1,4 @@
-function EventContainer() {
+function EventComponent() {
   const [events, setEvents] = React.useState([]);
 
   React.useEffect(() => {
@@ -27,4 +27,4 @@ function EventContainer() {
   ));
 }
 
-ReactDOM.render(<EventContainer />, document.querySelector("#events-section"));
+ReactDOM.render(<EventComponent />, document.querySelector("#events-section"));

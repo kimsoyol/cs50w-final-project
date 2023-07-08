@@ -1,13 +1,21 @@
 {% extends "eventbook/layout.html" %} {% load static %} {% block body %}
-<section class="events-content">
-  <div id="Event-Dashboard" class="px-4 py-3 max-md:text-center">
+<section class="events-content py-6">
+  <div id="Event-Dashboard" class="felx-1 px-4 max-lg:text-center">
     <span class="text-4xl">Discover Events</span>
-    <div id="events-section" class="flex gap-4 flex-wrap max-lg:justify-center"></div>
+    <div id="events-section" class="pt-3 flex gap-4 flex-wrap max-lg:justify-center"></div>
   </div>
 </section>
 {% endblock body %} {% block script %}
 <script
+  src="{% static 'eventbook/main.js' %}"
+></script>
+<script
   src="{% static 'eventbook/components/event.js' %}"
   type="text/babel"
 ></script>
+<script
+  src="{% static 'eventbook/components/avatar.js' %}"
+  type="text/babel"
+></script>
+
 {% endblock script %}
