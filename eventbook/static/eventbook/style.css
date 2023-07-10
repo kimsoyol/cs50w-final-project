@@ -1,0 +1,11 @@
+
+a {
+  color: blue;
+  text-decoration: none; /* no underline */
+}
+
+ol,
+ul {
+  list-style: none outside none;
+}
+

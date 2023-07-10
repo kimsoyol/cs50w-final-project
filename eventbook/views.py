@@ -66,3 +66,7 @@ def events(request):
     events = Event.objects.all().order_by('start_time')
 
     return JsonResponse([event.serialize() for event in events], safe=False)
+
+def create(request):
+    
+    return render(request, "eventbook/create.html")
