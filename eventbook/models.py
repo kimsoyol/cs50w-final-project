@@ -21,7 +21,7 @@ class Event(models.Model):
         return {
         'id': self.id,
         'title': self.title, 
-        'start_time': self.start_time.strftime("%A, %b %d %Y, %I:%M %p"),
+        'start_time': self.start_time.strftime("%a, %b %d %Y, %I:%M %p"),
         'description': self.description,
         'location': self.location,
         'image_url': self.image_url,

@@ -10,18 +10,17 @@ function EventComponent() {
   }, []);
 
   return events.map((event) => (
-    <div id={event.id} className="shrink-0 w-80 rounded-xl shadow-lg">
-      <img
-        src={event.image_url}
-        alt="event-image"
-        className="rounded-lg"
-      />
-      <div className="mt-4">
-        <span>{event.start_time}</span>
-        <h3>{event.title}</h3>
-        <p>{event.location}</p>
+    <div id={event.id} className="card" style={{ width: "18rem" }}>
+      <img src={event.image_url} alt="event-image" className="card-img-top" />
+      <div className="card-body">
+        <p className="card-text">{event.start_time}</p>
+        <h5 className="card-title">{event.title}</h5>
+        <p class="card-text">{event.location}</p>
         <span>{event.interested_guests.length} Interested</span>
         <span>{event.going_guests.length} Going</span>
+        <a href="#" class="btn btn-primary">
+          Go somewhere
+        </a>
       </div>
     </div>
   ));

@@ -14,7 +14,8 @@
     src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
     crossorigin
     ></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-bootstrap@2.8.0/dist/react-bootstrap.min.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -46,15 +47,23 @@
           />
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
-        <h3 style="overflow: hidden; border-radius: 3px;">
-          <i class="bi bi-person" style="font-size: 2rem;"></i>
-        </h3>
+        <div class="d-flex">
+          <div id="create-event" data-user={{ request.user.username.title }}>
+
+          </div>
+          <h3 style="overflow: hidden; border-radius: 3px;">
+            <i class="bi bi-person" style="font-size: 2rem;"></i>
+          </h3>
+        </div>
       </div>
     </nav>
 
     <div class="main d-flex vh-100">
       <div class="sidebar border-end bg-body-tertiary pt-5 mt-3">
         <ul class="sidbar-content pe-3">
+          {% if request.user %}
+          <li>{{request.user}}</li>
+          {% endif %}
           <li>Home</li>
           <li>Going</li>
           <li>Interested</li>
@@ -68,6 +77,10 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"
+    ></script>
+    <script
+      src="{% static 'eventbook/components/create.js' %}"
+      type="text/babel"
     ></script>
   </body>
 </html>
