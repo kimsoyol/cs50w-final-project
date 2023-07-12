@@ -11,7 +11,7 @@ class BaseAdmin(admin.ModelAdmin):
 
 
 class EventAdmin(BaseAdmin):
-    list_display = ('id', 'organizer', 'title', 'start_time', 'capacity', 'privacy', 'privacy')
+    list_display = ('id', 'organizer', 'title', 'start_time', 'privacy')
 class TicketAdmin(BaseAdmin):
     list_display = ('get_event', 'ticket_price', 'ticket_type', 'purchaser')
 

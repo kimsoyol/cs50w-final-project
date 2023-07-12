@@ -11,7 +11,6 @@ class Event(models.Model):
     description = models.TextField(max_length=800, null=True)
     location = models.CharField(max_length=255)
     image_url = models.URLField(max_length=200)
-    capacity = models.PositiveIntegerField()
     privacy = models.CharField(max_length=20)
     organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organized_events')
     interested_guests = models.ManyToManyField(User, related_name="interested_guest", blank=True)
@@ -25,7 +24,6 @@ class Event(models.Model):
         'description': self.description,
         'location': self.location,
         'image_url': self.image_url,
-        'capacity': self.capacity,
         'privacy': self.privacy,
         'organizer': self.organizer.username,
         'interested_guests': [guest.username for guest in self.interested_guests.all()],
