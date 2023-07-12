@@ -11,8 +11,6 @@ function CreateComponent() {
   // To calculate Time for time input values
   const currentTime = currentDate.getHours() + 1;
 
-  const ele = document.querySelector('#selectTime')
-
   const [time, setTime] = React.useState(currentTime)
   const [timeValues, setTimeValues] = React.useState([])
   const [create, setCreate] = React.useState(false);
@@ -20,7 +18,7 @@ function CreateComponent() {
   const [event, setEvent] = React.useState({
     title: "",
     start_date: currentDateString,
-    start_time: "",
+    start_time: timeValues[0],
     description: "",
     location: "",
     image_url: "",
@@ -57,17 +55,35 @@ function CreateComponent() {
   React.useEffect(() => {
    console.log('effect');
     let values = []
-
+    let hour = 0
+    let min = 0
+    let meridiem = ' AM'
     for (let i=time; i<24; i++){
       for (let j=0; j<60; j+=15){
-        values.push(i+':'+j)
+        if (i > 12) {
+          hour = i -12
+          meridiem = ' PM'
+        } else if (i == 0){
+          hour = 12
+        } else {
+          hour = i
+        }
+        if (j === 0) {
+          min = '00'
+        } else ( min = j)
+
+        values.push(hour +':'+ min + meridiem)
       }
     }
 
     setTimeValues(values)
 
-  }, [event.start_date])
+    setEvent({
+      ...event,
+      start_time: values[0]
+    })
 
+  }, [event.start_date])
 
   console.log(time);
 
@@ -84,7 +100,7 @@ function CreateComponent() {
   // Check if Form is filled
   const isFormValid = () => {
     return (
-      event.title && event.location && event.start_date && event.start_time
+      event.title
     );
   };
 
@@ -143,7 +159,7 @@ function CreateComponent() {
                 {/* Start Time */}
                 <div className="flex-fill">
                   <label htmlFor="startTime">Start Time</label>
-                  <select className="time-value form-select form-control" id="selectTime">
+                  <select className="time-value form-select form-control" id="startTime" onChange={handleChange} name="start_time">
                     {timeValues.map((timeValue) => {
                       return(
                         <option key={timeValue} value={timeValue}>{timeValue}
