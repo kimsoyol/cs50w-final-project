@@ -46,15 +46,14 @@
             placeholder="Search"
             aria-label="Search"
           />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
-        <div class="d-flex">
+        <div class="d-flex align-items-center">
           <div id="create-event" data-user={{ request.user.username.title }}>
-
           </div>
-          <h3 style="overflow: hidden; border-radius: 3px;">
-            <i class="bi bi-person" style="font-size: 2rem;"></i>
-          </h3>
+          <h2 class="mb-0">
+            <a href="#" style="color: black"><i class="bi bi-person" ></i></a>
+          </h2>
         </div>
       </div>
     </nav>

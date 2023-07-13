@@ -3,7 +3,6 @@ function CreateComponent() {
     .querySelector("#create-event")
     .getAttribute("data-user");
 
-
   // Get current date and time to prefill in form
   const currentDate = new Date();
   // Format date and time strings
@@ -18,7 +17,7 @@ function CreateComponent() {
   const [event, setEvent] = React.useState({
     title: "",
     start_date: currentDateString,
-    start_time: timeValues[0],
+    start_time: '',
     description: "",
     location: "",
     image_url: "",
@@ -35,13 +34,13 @@ function CreateComponent() {
   };
 
   const handleDateChange = (e) => {
-    // set the time upon user date input
+    // Set the start time options upon user date input
     const userDate = new Date(e.target.value);
     if (userDate > currentDate) {
-      console.log('future');
+      // If user choose future date time options are 24 hours
       setTime(0)
     } else {
-      console.log('current');
+      // If user choose today time options start from right now + 1h
       setTime(currentTime)
     }
 
@@ -53,31 +52,44 @@ function CreateComponent() {
 
 
   React.useEffect(() => {
-   console.log('effect');
     let values = []
     let hour = 0
     let min = 0
     let meridiem = ' AM'
-    for (let i=time; i<24; i++){
-      for (let j=0; j<60; j+=15){
-        if (i > 12) {
-          hour = i -12
-          meridiem = ' PM'
-        } else if (i == 0){
-          hour = 12
-        } else {
-          hour = i
-        }
-        if (j === 0) {
-          min = '00'
-        } else ( min = j)
 
-        values.push(hour +':'+ min + meridiem)
+    if (time == 24){
+      for (let i=0; i<60; i+=15){
+        min = i
+        values.push(12 +':'+ min + meridiem)
+      }
+    } else {
+      for (let i=time; i<24; i++){
+        for (let j=0; j<60; j+=15){
+          if (i > 12) {
+            hour = i - 12
+            meridiem = ' PM'
+          } else if (i == 12){
+            hour = 12
+            meridiem = ' PM'
+          }else if (i == 0){
+            hour = 12
+          } else {
+            hour = i
+          }
+          if (j === 0) {
+            min = '00'
+          } else ( min = j)
+  
+          values.push(hour +':'+ min + meridiem)
+        }
       }
     }
 
+    
+
     setTimeValues(values)
 
+    // set the initial state for start_time
     setEvent({
       ...event,
       start_time: values[0]
@@ -203,10 +215,7 @@ function CreateComponent() {
     );
   }
 
-  return (
-    <div>
-      <button onClick={handleCreate}>Create</button>
-    </div>
+  return ( <button className="btn btn-outline-primary me-2" onClick={handleCreate}>Create</button>
   );
 }
 
