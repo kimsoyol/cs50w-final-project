@@ -31,6 +31,7 @@
     {% block script %} {% endblock %}
   </head>
   <body>
+    <!-- Navbar -->
     <nav class="navbar fixed-top bg-body-tertiary">
       <div class="container-fluid">
         <div class="d-flex align-items-center gap-1">
@@ -51,15 +52,25 @@
         <div class="d-flex align-items-center">
           <div id="create-event" data-user={{ request.user.username.title }}>
           </div>
-          <h2 class="mb-0">
-            <a href="#" style="color: black"><i class="bi bi-person" ></i></a>
-          </h2>
+          <div class="dropdown">
+            <h2 class="mb-0">
+              <a href="#" role='button' style="color: black" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person" ></i></a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+              </ul>
+            </h2>
+          </div>
         </div>
       </div>
     </nav>
 
     <div class="main d-flex vh-100">
       <div class="sidebar border-end bg-body-tertiary pt-5 mt-3">
+        <!-- Sidebar -->
         <ul class="sidbar-content pe-3">
           {% if request.user %}
           <li>{{request.user}}</li>
