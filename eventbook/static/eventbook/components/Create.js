@@ -83,10 +83,8 @@ function CreateComponent() {
           values.push(hour +':'+ min + meridiem)
         }
       }
-    }
-
-    
-
+    } 
+    // for start_time options
     setTimeValues(values)
 
     // set the initial state for start_time
@@ -118,7 +116,18 @@ function CreateComponent() {
 
   const handleSubmit = () => {
     setCreate(false);
-    console.log(event);
+    
+    fetch('create_event', {
+      method: "POST",
+      body: JSON.stringify({
+        event: event
+      })
+    })
+      .then(res => res.json())
+      .then(() => {
+        console.log('event created');
+      })
+    
   };
 
   if (create) {

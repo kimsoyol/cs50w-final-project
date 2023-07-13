@@ -1,4 +1,6 @@
+import json
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout
@@ -7,6 +9,7 @@ from django.urls import reverse
 from django.http import JsonResponse
 from .models import User, Event
 
+from .util import format_datetime
 
 def login_view(request):
     if request.method == "POST":
@@ -58,7 +61,7 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "eventbook/register.html")
-# Create your views here.
+
 def index(request):
     return render(request, "eventbook/index.html")
 
@@ -67,6 +70,27 @@ def events(request):
 
     return JsonResponse([event.serialize() for event in events], safe=False)
 
-def create(request):
+@csrf_exempt
+@login_required
+def create_event(request):
+       
+    # Adding a new event must be via POST
+    if request.method == "POST":
+        event_data = json.loads(request.body)
+        data = event_data.get("event")
+        event = Event(
+            title = data['title'],
+            start_time = format_datetime(data['start_date'],data['start_time']),
+            description = data['description'],
+            location = data['location'],
+            image_url = data['image_url'],
+            privacy = data['privacy'],
+            organizer = request.user
+        )
+        event.save()
+        return JsonResponse({"message": 'SUCCESSFUL.'}, status=201)
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
+
+
     
-    return render(request, "eventbook/create.html")
