@@ -69,14 +69,14 @@
     </nav>
 
     <div class="main d-flex vh-100">
-      <div class="sidebar border-end bg-body-tertiary pt-5 mt-3">
+      <div class="sidebar border-end bg-body-tertiary pt-5 mt-3 h-auto">
         <!-- Sidebar -->
         <ul class="sidbar-content pe-3">
           {% if request.user %}
           <li>{{request.user}}</li>
           {% endif %}
-          <li>Home</li>
-          <li>Going</li>
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'index' %}">Going</a></li>
           <li>Interested</li>
           <li>Hosting</li>
         </ul>

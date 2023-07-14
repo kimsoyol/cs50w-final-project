@@ -42,9 +42,11 @@
                             {{ event.privacy }}
                         </li>
                     </ul>
-                    <div style="white-space: pre-line" class="pb-3">
-                        {{ event.description }}
-                    </div>
+                    {% if event.description %}
+                        <div class="pb-3 event-description">
+                            {{ event.description }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">Cmt</div>
             </div>
