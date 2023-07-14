@@ -1,13 +1,14 @@
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelector("#sidebar-toggle")
+    .addEventListener("click", handleSideBar);
+});
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     document.querySelector("#avatar-btn").addEventListener('click', handleDropdown)
-//     document.querySelector('#sidebar-toggle').addEventListener('click', handleSideBar)
-// })
-
-// function handleDropdown() {
-//     document.querySelector("#dropdown").classList.toggle('hidden')
-// }
-
-// function handleSideBar() {
-//     document.querySelector('#sidebar').classList.toggle('-translate-x-full')
-// }
+const handleSideBar = () => {
+  const x = document.querySelector(".sidebar")
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+};
