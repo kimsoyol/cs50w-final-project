@@ -19,7 +19,7 @@ class ReviewAdmin(BaseAdmin):
     list_display = ('get_event', 'reviewer', 'content', 'rating', 'review_date')
 
 class CommentAdmin(BaseAdmin):
-    list_display = ('get_event', 'user', 'content')
+    list_display = ('id', 'get_event', 'user', 'content')
 
 admin.site.register(User)
 admin.site.register(Event, EventAdmin)

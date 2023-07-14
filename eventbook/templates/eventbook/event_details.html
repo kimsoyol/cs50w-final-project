@@ -1,64 +1,106 @@
 {% extends "eventbook/layout.html" %} {% load static %} {% block body %}
 
 <section class="events-content py-6 w-100">
-    <div id="Event-Dashboard" class="pt-5 mt-3 ps-3">
-        <div class="img-container container-fluid">
-            <img src="{{event.image_url}}" class="rounded d-block"alt="event-image">
-        </div>
-        <div class="details-container pt-3">
-            <h5>{{event.start_time}}</h5>
-            <h1>{{event.title}}</h1>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">About</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Comments</button>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                    <ul class="ps-0 pt-3 mb-0"><strong>Details</strong>
-                        <li>
-                            <i class="bi bi-people-fill"></i>
-                            {{ total }} people responded
-                        </li>
-                        <li>
-                            <i class="bi bi-person-fill"></i>
-                            Event by {{ event.organizer.title }}
-                        </li>
-                        <li>
-                            <i class="bi bi-geo-alt-fill"></i>
-                            {{ event.location }}
-                        </li>
-                        <li>
-                            {% if event.privacy == 'Public' %}
-                                <i class="bi bi-globe-americas"></i>
-                            {% elif event.privacy == 'Private' %}
-                                <i class="bi bi-people-fill"></i>
-                            {% else %}
-                                <i class="bi bi-lock-fill"></i>
-                            {% endif %}
-                            {{ event.privacy }}
-                        </li>
-                    </ul>
-                    {% if event.description %}
-                        <div class="pb-3 event-description">
-                            {{ event.description }}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">Cmt</div>
-            </div>
-        </div>
+  <div id="Event-Dashboard" class="pt-5 mt-3 ps-3">
+    <div class="img-container container-fluid">
+      <img
+        src="{{event.image_url}}"
+        class="rounded d-block"
+        alt="event-image"
+      />
     </div>
+    <div class="details-container pt-3">
+      <h5>{{event.start_time}}</h5>
+      <h1>{{event.title}}</h1>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="home-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#home-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="home-tab-pane"
+            aria-selected="true"
+          >
+            About
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#profile-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="profile-tab-pane"
+            aria-selected="false"
+          >
+            Comments
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="home-tab-pane"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+          tabindex="0"
+        >
+          <ul class="ps-0 pt-3 mb-0">
+            <strong>Details</strong>
+            <li>
+              <i class="bi bi-people-fill"></i>
+              {{ total }} people responded
+            </li>
+            <li>
+              <i class="bi bi-person-fill"></i>
+              Event by {{ event.organizer.title }}
+            </li>
+            <li>
+              <i class="bi bi-geo-alt-fill"></i>
+              {{ event.location }}
+            </li>
+            <li>
+              {% if event.privacy == 'Public' %}
+              <i class="bi bi-globe-americas"></i>
+              {% elif event.privacy == 'Private' %}
+              <i class="bi bi-people-fill"></i>
+              {% else %}
+              <i class="bi bi-lock-fill"></i>
+              {% endif %} {{ event.privacy }}
+            </li>
+          </ul>
+          {% if event.description %}
+          <div class="pb-3 event-description">{{ event.description }}</div>
+          {% endif %}
+        </div>
+        <div
+          class="tab-pane fade"
+          id="profile-tab-pane"
+          role="tabpanel"
+          aria-labelledby="profile-tab"
+          tabindex="0"
+        >
+          <div
+            class="cmt-component container-fluid"
+            data-event-id="{{event.id}}"
+            data-user="{{request.user}}"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 {% endblock body %} {% block script %}
+<script src="{% static 'eventbook/main.js' %}"></script>
 <script
-  src="{% static 'eventbook/main.js' %}"
+  src="{% static 'eventbook/components/Comment.js' %}"
+  type="text/babel"
 ></script>
 
-
 {% endblock script %}
-

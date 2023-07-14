@@ -95,7 +95,6 @@ function CreateComponent() {
 
   }, [event.start_date])
 
-  console.log(time);
 
   // Show the modal
   const handleCreate = () => {

@@ -2,6 +2,7 @@ function EventComponent() {
   const [events, setEvents] = React.useState([]);
 
   React.useEffect(() => {
+    console.log('effectEvent');
     fetch(`/events`)
       .then((response) => response.json())
       .then((events) => {

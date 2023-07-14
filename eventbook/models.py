@@ -50,3 +50,12 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='event_comments')
     content = models.TextField()
     comment_date = models.DateTimeField(auto_now_add=True)
+    
+    def serialize(self):
+        return {
+            'id': self.id,
+            'event': self.event.id,
+            'user': self.user.username,
+            'content': self.content,
+            'comment_date': self.comment_date.strftime("%a, %b %d %Y, %I:%M %p"),
+        }

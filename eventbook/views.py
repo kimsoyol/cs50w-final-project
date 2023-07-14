@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import JsonResponse
-from .models import User, Event
+from .models import User, Event, Comment
 
 from .util import format_datetime
 
@@ -100,4 +100,23 @@ def event_details(request, id):
     return render(request, 'eventbook/event_details.html', {
         'event': event.serialize(),
         'total': total
-        })
+    })
+
+@csrf_exempt
+@login_required
+def comment(request, id):
+    event = Event.objects.get(id=id)
+    if request.method == "POST":
+        comment_data = json.loads(request.body)
+        data = comment_data.get("comment")
+        print(data)
+        comment = Comment(
+            event = event,
+            user = request.user,
+            content = data
+        )
+        comment.save()
+    comments = event.comments.all().order_by('-comment_date')
+    return JsonResponse([comment.serialize() for comment in comments]
+    , safe=False)
+
