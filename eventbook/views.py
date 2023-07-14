@@ -85,7 +85,8 @@ def create_event(request):
             location = data['location'],
             image_url = data['image_url'],
             privacy = data['privacy'],
-            organizer = request.user
+            organizer = request.user,
+            going_guests = request.user,
         )
         event.save()
         return JsonResponse({"message": 'SUCCESSFUL.'}, status=201)
@@ -93,4 +94,10 @@ def create_event(request):
         return JsonResponse({'error': 'Invalid request method'})
 
 
-    
+def event_details(request, id):
+    event = Event.objects.get(id=id)
+    total = event.going_guests.count() + event.interested_guests.count()
+    return render(request, 'eventbook/event_details.html', {
+        'event': event.serialize(),
+        'total': total
+        })

@@ -11,4 +11,5 @@ urlpatterns = [
 
     # API Routes
     path("events", views.events, name='events'),
+    path("event_details/<int:id>", views.event_details, name='event_details'),
 ]

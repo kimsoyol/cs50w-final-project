@@ -9,3 +9,13 @@ ul {
   list-style: none outside none;
 }
 
+.img-container {
+  height: 450px;
+  display: block;
+}
+
+.img-container img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

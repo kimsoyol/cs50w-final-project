@@ -8,18 +8,24 @@ function EventComponent() {
         setEvents(events);
       });
   }, []);
+  
+  const handleClick = (id) => {
+    window.location.href = `/event_details/${id}`
+  }
 
   return events.map((event) => (
-    <div id={event.id} className="card" style={{ width: "18rem" }}>
+    <div id={event.id} className="card" style={{ width: "18rem" }} onClick={() => handleClick(event.id)}>
       <img src={event.image_url} alt="event-image" className="card-img-top" />
       <div className="card-body">
         <p className="card-text">{event.start_time}</p>
         <h5 className="card-title">{event.title}</h5>
-        <p class="card-text">{event.location}</p>
-        <span>{event.interested_guests.length} Interested</span>
-        <span>{event.going_guests.length} Going</span>
+        <p class="card-text">
+          <span className="d-block">{event.location}</span>
+          <span>{event.interested_guests.length} Interested</span>
+          <span>{event.going_guests.length} Going</span>
+        </p>
         <a href="#" class="btn btn-primary">
-          Go somewhere
+          Interested
         </a>
       </div>
     </div>
