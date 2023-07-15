@@ -21,7 +21,8 @@ function EventComponent() {
     console.log('clicked');
     const event = events.find(e => e.id === id)
     let status = ''
-    if (user in event.interested_guests){
+    console.log(event.interested_guests);
+    if (event.interested_guests.includes(user)){
       status = 'remove'
       console.log('remove from interested')
     } else {
@@ -50,7 +51,7 @@ function EventComponent() {
           <span>{event.going_guests.length} Going</span>
         </p>
         
-        <button href="#" className={user == event.interested_guests ? "btn btn-primary": "btn btn-outline-primary"} onClick={() => handleInterested(event.id)}>
+        <button href="#" className={event.interested_guests.includes(user) ? "btn btn-primary": "btn btn-outline-primary"} onClick={() => handleInterested(event.id)}>
           Interested
         </button>
       </div>
