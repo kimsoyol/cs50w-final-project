@@ -120,3 +120,18 @@ def comment(request, id):
     return JsonResponse([comment.serialize() for comment in comments]
     , safe=False)
 
+
+@csrf_exempt
+@login_required
+def interested(request, id):
+    event = Event.objects.get(id=id)
+    if request.method == "PUT":
+        status_data = json.loads(request.body)
+        data = status_data.get("status")
+        if data == 'add':
+            event.interested_guests.add(request.user)
+        else:
+            event.interested_guests.remove(request.user)
+        event.save()
+        
+    return JsonResponse({'message': 'SUCCESS'}, status=201)

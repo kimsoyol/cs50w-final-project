@@ -1,4 +1,6 @@
 function EventComponent() {
+  const user = document.querySelector(".events-content").getAttribute('data-user')
+
   const [events, setEvents] = React.useState([]);
 
   React.useEffect(() => {
@@ -14,20 +16,43 @@ function EventComponent() {
     window.location.href = `/event_details/${id}`
   }
 
+
+  const handleInterested = (id) => {
+    console.log('clicked');
+    const event = events.find(e => e.id === id)
+    let status = ''
+    if (user in event.interested_guests){
+      status = 'remove'
+      console.log('remove from interested')
+    } else {
+      status = 'add'
+      console.log('add to interested')
+    }
+
+    fetch(`/interested/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        status: status
+      })
+    })
+      
+  }
+
   return events.map((event) => (
     <div id={event.id} className="card" style={{ width: "18rem" }} onClick={() => handleClick(event.id)}>
       <img src={event.image_url} alt="event-image" className="card-img-top" />
       <div className="card-body">
         <p className="card-text">{event.start_time}</p>
         <h5 className="card-title">{event.title}</h5>
-        <p class="card-text">
+        <p className="card-text">
           <span className="d-block">{event.location}</span>
           <span>{event.interested_guests.length} Interested</span>
           <span>{event.going_guests.length} Going</span>
         </p>
-        <a href="#" class="btn btn-primary">
+        
+        <button href="#" className={user == event.interested_guests ? "btn btn-primary": "btn btn-outline-primary"} onClick={() => handleInterested(event.id)}>
           Interested
-        </a>
+        </button>
       </div>
     </div>
   ));
