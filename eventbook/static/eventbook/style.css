@@ -8,9 +8,13 @@ ul {
   list-style: none outside none;
 }
 
-html,body {
-  height: 100%;
+body {
+  min-height: 100vh;
   margin: 0;
+}
+
+.sidebar{
+  width: 150px;
 }
 
 .img-container {

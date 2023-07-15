@@ -32,7 +32,7 @@
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar fixed-top bg-body-tertiary">
+    <nav class="navbar fixed-top bg-body-tertiary z-3">
       <div class="container-fluid">
         <div class="d-flex align-items-center gap-1">
           <h2 class="mb-0" id="sidebar-toggle">
@@ -68,9 +68,9 @@
       </div>
     </nav>
 
-    <div class="main d-flex vh-100">
-      <div class="sidebar border-end bg-body-tertiary pt-5 mt-3 h-auto">
-        <!-- Sidebar -->
+    <div class="main d-flex">
+      <!-- Sidebar -->
+      <div class="sidebar border-end bg-body-tertiary pt-5 mt-3 h-auto z-1">
         <ul class="sidbar-content pe-3">
           {% if request.user %}
           <li>{{request.user}}</li>
