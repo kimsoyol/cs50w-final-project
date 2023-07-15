@@ -68,10 +68,10 @@
       </div>
     </nav>
 
-    <div class="main d-flex">
+    <div class="main">
       <!-- Sidebar -->
-      <div class="sidebar border-end bg-body-tertiary pt-5 mt-3 h-auto z-1">
-        <ul class="sidbar-content pe-3">
+      <div class="sidebar bg-body-tertiary pt-5">
+        <ul class="sidbar-content ">
           {% if request.user %}
           <li>{{request.user}}</li>
           {% endif %}
@@ -81,7 +81,9 @@
           <li>Hosting</li>
         </ul>
       </div>
-      {% block body %} {% endblock %}
+      <div class='content-main' style="padding-left: 8rem">
+        {% block body %} {% endblock %}
+      </div>
     </div>
    
     <script

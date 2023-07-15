@@ -13,9 +13,14 @@ body {
   margin: 0;
 }
 
-.sidebar{
-  width: 150px;
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 8rem;
 }
+
 
 .img-container {
   height: 450px;
