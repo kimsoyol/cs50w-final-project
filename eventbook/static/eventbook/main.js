@@ -1,7 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  document
-    .querySelector("#sidebar-toggle")
-    .addEventListener("click", handleSideBar);
+  const sideBar = document.querySelector("#sidebar-toggle")
+  if (sideBar){
+    sideBar.addEventListener("click", handleSideBar);
+  }
+
+  const deleteBtn = document.querySelector(".deleteBtn")
+  if (deleteBtn) {
+    const eventId = deleteBtn.getAttribute("data-event-id")
+    deleteBtn.addEventListener('click', () => handleDelete(eventId))
+  }
 });
 
 const handleSideBar = () => {
@@ -15,3 +22,14 @@ const handleSideBar = () => {
     content.style.paddingLeft = '0';
   }
 };
+
+const handleDelete = (id) => {
+  fetch('/delete', {
+    method: 'POST',
+    body: JSON.stringify({
+      eventId: id
+    })
+  })
+  .then(response => response.json())
+  .then( () => window.location.href = '/')
+}

@@ -36,7 +36,6 @@ function EventComponent() {
         status: status
       })
     })
-      
   }
 
   return events.map((event) => (
@@ -50,7 +49,6 @@ function EventComponent() {
           <span>{event.interested_guests.length} Interested</span>
           <span>{event.going_guests.length} Going</span>
         </p>
-        
         <button href="#" className={event.interested_guests.includes(user) ? "btn btn-primary": "btn btn-outline-primary"} onClick={() => handleInterested(event.id)}>
           Interested
         </button>

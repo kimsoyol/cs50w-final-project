@@ -86,9 +86,9 @@ def create_event(request):
             image_url = data['image_url'],
             privacy = data['privacy'],
             organizer = request.user,
-            going_guests = request.user,
         )
         event.save()
+        event.going_guests.add(request.user)
         return JsonResponse({"message": 'SUCCESSFUL.'}, status=201)
     else:
         return JsonResponse({'error': 'Invalid request method'})
@@ -109,7 +109,6 @@ def comment(request, id):
     if request.method == "POST":
         comment_data = json.loads(request.body)
         data = comment_data.get("comment")
-        print(data)
         comment = Comment(
             event = event,
             user = request.user,
@@ -135,3 +134,28 @@ def interested(request, id):
         event.save()
         
     return JsonResponse({'message': 'SUCCESS'}, status=201)
+   
+
+@csrf_exempt
+@login_required
+def going(request, id):
+    event = Event.objects.get(id=id)
+    interest = True if event.interested_guests.filter(id=request.user.id) else False
+    going = True if event.going_guests.filter(id=request.user.id) else False
+    data ={
+        'interest':interest,
+        'going': going
+    }
+    return JsonResponse(data)
+
+
+@csrf_exempt
+@login_required
+def delete(request):
+    if request.method == "POST":
+        event_data = json.loads(request.body)
+        id = event_data.get('eventId')
+        print(id)
+        event = Event.objects.get(id=id)
+        event.delete()
+        return JsonResponse({'message': 'SUCCESS'}, status=201)
