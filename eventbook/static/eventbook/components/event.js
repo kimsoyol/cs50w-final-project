@@ -2,20 +2,34 @@ function EventComponent() {
   const user = document.querySelector(".events-content").getAttribute('data-user')
 
   const [events, setEvents] = React.useState([]);
+  const [filter, setFilter] = React.useState('All')
 
   React.useEffect(() => {
     console.log('effectEvent');
-    fetch(`/events`)
+    fetch(`/events/${filter}`)
       .then((response) => response.json())
       .then((events) => {
         setEvents(events);
       });
-  }, []);
+  }, [filter]);
+
+
+  document.querySelector('.sidebar-content').addEventListener('click', (event) => {
+    const clickedItem = event.target.textContent;
+    setFilter(clickedItem);
+  });
+
+
+
   
   const handleClick = (id) => {
     window.location.href = `/event_details/${id}`
   }
 
+  // Handle click on sidebar
+  const handleHosting = () => {
+    console.log('howdy');
+  }
 
   const handleInterested = (id) => {
     console.log('clicked');
@@ -58,3 +72,6 @@ function EventComponent() {
 }
 
 ReactDOM.render(<EventComponent />, document.querySelector("#events-section"));
+
+
+

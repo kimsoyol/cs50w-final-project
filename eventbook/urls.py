@@ -10,7 +10,7 @@ urlpatterns = [
     path("create_event", views.create_event, name="create_event"),
 
     # API Routes
-    path("events", views.events, name='events'),
+    path("events/<str:filter>", views.events, name='events'),
     path("comment/<int:id>", views.comment, name='comment'),
     path("event_details/<int:id>", views.event_details, name='event_details'),
     path("interested/<int:id>", views.interested, name='interested'),

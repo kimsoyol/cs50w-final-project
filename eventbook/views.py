@@ -65,9 +65,18 @@ def register(request):
 def index(request):
     return render(request, "eventbook/index.html")
 
-def events(request):
-    events = Event.objects.all().order_by('start_time')
+def events(request, filter):
+    # Choose events and return based on filter
+    if filter == 'All':
+        events = Event.objects.all().order_by('start_time')
 
+    elif filter == "Hosting":
+        events = Event.objects.filter(organizer=request.user)
+
+    elif filter == "Going":
+        events =  request.user.going_guests.all()
+    elif filter == 'Interested':
+        events = request.user.interested_guest.all()
     return JsonResponse([event.serialize() for event in events], safe=False)
 
 @csrf_exempt

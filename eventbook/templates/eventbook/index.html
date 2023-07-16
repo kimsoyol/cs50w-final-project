@@ -1,10 +1,12 @@
 {% extends "eventbook/layout.html" %} {% load static %} {% block body %}
+<div class='content-main' style="padding-left: 8rem">
 <section class="events-content py-6 d-flex" data-user={{ request.user }}>
   <div id="Event-Dashboard" class="pt-5 mt-3 ps-3">
     <span class="text-4xl">Discover Events</span>
     <div id="events-section" class="d-flex gap-3 flex-wrap"></div>
   </div>
 </section>
+</div>
 {% endblock body %} {% block script %}
 <script
   src="{% static 'eventbook/main.js' %}"

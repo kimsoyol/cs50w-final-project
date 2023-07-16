@@ -1,5 +1,6 @@
 {% extends "eventbook/layout.html" %} {% load static %} {% block body %}
 
+<div class='content-main' style="padding-left: 8rem">
 <section class="events-content py-5 w-100">
   <div id="Event-Dashboard" class="pt-3 ps-3">
     <div class="img-container container-fluid">
@@ -104,7 +105,7 @@
     </div>
   </div>
 </section>
-
+</div>
 {% endblock body %} {% block script %}
 <script src="{% static 'eventbook/main.js' %}"></script>
 <script
