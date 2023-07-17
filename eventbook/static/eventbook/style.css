@@ -22,6 +22,10 @@ body {
   width: 8rem;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 
 .img-container {
   height: 450px;
