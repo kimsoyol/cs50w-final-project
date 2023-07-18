@@ -74,11 +74,15 @@ Viewing Event Details:
 
 Sidebar Navigation:
 
-    The sidebar contains the following options:
-        Home: Click on "Home" to go back to the main page displaying all events.
-        Going: Click on "Going" to view events you have responded to with "Going."
-        Interested: Click on "Interested" to view events you have responded to with "Interested."
-        Hosting: Click on "Hosting" to view events you have created and are currently hosting.
+The sidebar contains the following options:
+
+    1. Home: Click on "Home" to go back to the main page displaying all events.
+
+    2. Going: Click on "Going" to view events you have responded to with "Going."
+
+    3. Interested: Click on "Interested" to view events you have responded to with "Interested."
+    
+    4. Hosting: Click on "Hosting" to view events you have created and are currently hosting.
 
 
 
