@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.http import JsonResponse
 from .models import User, Event, Comment
 
-from .util import format_datetime
+from .util import format_datetime, total_people
 
 def login_view(request):
     if request.method == "POST":
@@ -150,6 +150,7 @@ def interested(request, id):
 @login_required
 def going(request, id):
     event = Event.objects.get(id=id)
+    total = total_people(id)
     if request.method == "PUT":
         engage_data = json.loads(request.body)
         engage = engage_data.get('engage')
@@ -160,6 +161,7 @@ def going(request, id):
                 event.interested_guests.add(request.user)
             else:
                 event.interested_guests.remove(request.user)
+                event.going_guests.remove(request.user)
         if (engage == 'going'):
             if status == True:
                 event.going_guests.add(request.user)
@@ -173,7 +175,8 @@ def going(request, id):
 
         data ={
             'interest':interest,
-            'going': going
+            'going': going,
+            'total': total
         }
         return JsonResponse(data)
 

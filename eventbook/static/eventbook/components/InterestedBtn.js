@@ -1,10 +1,7 @@
 
 function InterestedBtn () {
     const id = document.querySelector(".interestedBtn").getAttribute('data-event-id')
-    let totalPeopleEle = document.querySelector("#ppl-responded")
-    let textIndex = totalPeopleEle.indexOf(" people responded")
-    let totalPeople = parseInt(totalPeopleEle.slice(0, textIndex));
-
+    
     const [interest, setInterest] = React.useState()
     const [going, setGoing] = React.useState()
 
@@ -15,8 +12,14 @@ function InterestedBtn () {
         .then(data => {
             setInterest(data.interest)
             setGoing(data.going)
+            updateTotal(data.total)
         })
     }, [interest, going])
+
+
+    const updateTotal = (total) => {
+        document.querySelector("#total-people").textContent = total
+    }
 
     const handleInterest = () => {
         const status = !interest
@@ -29,8 +32,7 @@ function InterestedBtn () {
         }).then((response) => response.json())
         .then(data => setInterest(data.status))
         console.log('interest set to ' + status);
-        let newCount = !interest ? totalPeople + 1 : totalPeople - 1
-        totalPeopleEle.textContent = `${newCount} people responded`;
+        
     }
 
     const handleGoing = () => {
@@ -44,13 +46,9 @@ function InterestedBtn () {
         }).then((response) => response.json())
         .then(data => setGoing(data.status))
         console.log('going set to ' + status);
-        totalPeopleEle.textContent = !interest ? Number(totalPeople) + 1 : Number(totalPeople) - 1
 
     }
  
-    console.log('outside interset ' + interest);
-    console.log('outside going ' + going);
-    console.log('=================================' );
 
     return (
         <div class="btn-group" role="group" >
