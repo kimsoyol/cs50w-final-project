@@ -84,20 +84,3 @@ The sidebar contains the following options:
     
     4. Hosting: Click on "Hosting" to view events you have created and are currently hosting.
 
-
-
-## Dependencies
-
-[If your project has specific dependencies, list them here along with their version numbers.]
-
-## Additional Information
-
-[Include any other relevant information about your project that the staff should know.]
-
-## Acknowledgments
-
-[List any third-party libraries, code snippets, or tutorials that you used in your project.]
-
-## Contact Information
-
-[Optional: Provide your contact information or GitHub profile link for feedback and collaboration.]
