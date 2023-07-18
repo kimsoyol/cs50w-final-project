@@ -82,7 +82,10 @@ function EventComponent() {
   }
 }
 
-ReactDOM.render(<EventComponent />, document.querySelector("#events-section"));
+if (document.querySelector("#events-section")){
+  ReactDOM.render(<EventComponent />, document.querySelector("#events-section"));
+}
+
 
 
 

@@ -31,20 +31,6 @@ class Event(models.Model):
     }
 
 
-class Ticket(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='tickets')
-    ticket_price = models.DecimalField(max_digits=8, decimal_places=2, null=True)
-    ticket_type = models.CharField(max_length=100)
-    purchaser = models.ForeignKey(User, on_delete=models.CASCADE, related_name='purchased_tickets')
-
-
-class Review(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='reviews')
-    reviewer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='event_reviews')
-    content = models.TextField()
-    rating = models.PositiveIntegerField()
-    review_date = models.DateTimeField()
-
 class Comment(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE,  related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='event_comments')

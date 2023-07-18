@@ -150,13 +150,32 @@ def interested(request, id):
 @login_required
 def going(request, id):
     event = Event.objects.get(id=id)
-    interest = True if event.interested_guests.filter(id=request.user.id) else False
-    going = True if event.going_guests.filter(id=request.user.id) else False
-    data ={
-        'interest':interest,
-        'going': going
-    }
-    return JsonResponse(data)
+    if request.method == "PUT":
+        engage_data = json.loads(request.body)
+        engage = engage_data.get('engage')
+        status = engage_data.get('status')
+        print(engage, status)
+        if (engage == 'interest'):
+            if status == True:
+                event.interested_guests.add(request.user)
+            else:
+                event.interested_guests.remove(request.user)
+        if (engage == 'going'):
+            if status == True:
+                event.going_guests.add(request.user)
+            else:
+                event.going_guests.remove(request.user)
+            event.save()
+        return JsonResponse({'message': 'SUCCESS'}, status=201)
+    else:
+        interest = event.interested_guests.filter(id=request.user.id).exists()
+        going = event.going_guests.filter(id=request.user.id).exists()
+
+        data ={
+            'interest':interest,
+            'going': going
+        }
+        return JsonResponse(data)
 
 
 @csrf_exempt

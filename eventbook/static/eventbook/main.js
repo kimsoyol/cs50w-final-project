@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const sideBar = document.querySelector("#sidebar-toggle")
-  if (sideBar){
-    sideBar.addEventListener("click", handleSideBar);
+  const sideBarBtn = document.querySelector("#sidebar-toggle")
+  if (sideBarBtn){
+    sideBarBtn.addEventListener("click", handleSideBarBtn);
   }
 
   const deleteBtn = document.querySelector(".deleteBtn")
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-const handleSideBar = () => {
+const handleSideBarBtn = () => {
   const x = document.querySelector(".sidebar")
   const content = document.querySelector(".content-main")
   if (x.style.display === "none") {

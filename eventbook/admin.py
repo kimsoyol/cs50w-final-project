@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Event, Ticket, Review, Comment
+from .models import User, Event, Comment
 
 
 class BaseAdmin(admin.ModelAdmin):
@@ -23,6 +23,4 @@ class CommentAdmin(BaseAdmin):
 
 admin.site.register(User)
 admin.site.register(Event, EventAdmin)
-admin.site.register(Ticket, TicketAdmin)
-admin.site.register(Review, ReviewAdmin)
 admin.site.register(Comment, CommentAdmin)
